@@ -1,0 +1,71 @@
+@charset "utf-8";
+
+header{
+    display:flex;
+    padding: 1rem 3rem;
+    background: #ddd;
+}
+header .logout{
+    margin-left:auto;
+}
+.menu{
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius:5px;
+    background: #ddd;
+}
+.menu li{
+    cursor:pointer;
+    width: fit-content;
+    list-style:none;
+}
+.menu h5{
+    border-bottom:3px solid #ccc;
+    padding-bottom: 0.3rem;
+    width: fit-content;
+}
+.form{
+    display: flex;
+    column-gap: 5px;
+}
+
+/* message */
+.message-content{
+    background: #333;
+    color:#fff;
+    width:fit-content;
+    max-width:60%;
+    padding: 1rem 2rem;
+    border-radius:5px;
+}
+.message-area{
+    padding: 3rem 2rem;
+    background: #ddd;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    height:100vh;
+    overflow-y:scroll;
+    border-radius:5px;
+}
+.message-wrap{
+    margin-bottom: 1rem;
+}
+.user-name{
+    font-weight:bold;
+    font-size:1.5rem;
+}
+.self{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.self-message-content{
+    background: rgb(7, 167, 111);
+    color:#fff;
+    max-width:60%;
+    width: fit-content;
+    padding: 1rem 2rem;
+    border-radius:5px;
+    word-break:break-word;
+}
