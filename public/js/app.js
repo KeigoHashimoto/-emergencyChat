@@ -5321,19 +5321,30 @@ __webpack_require__.r(__webpack_exports__);
       users: [],
       authUser: [],
       lat: 0,
-      lng: 0
+      lng: 0,
+      checked: true
     };
   },
   methods: {
     send: function send() {
       var _this = this;
       var url = 'message/ajax/store';
-      var param = {
-        content: this.message,
-        user_id: this.authUser,
-        latitude: this.lat,
-        longitude: this.lng
-      };
+      var param = {};
+      if (this.checked === true) {
+        param = {
+          content: this.message,
+          user_id: this.authUser,
+          latitude: this.lat,
+          longitude: this.lng
+        };
+      } else {
+        param = {
+          content: this.message,
+          user_id: this.authUser,
+          latitude: null,
+          longitude: null
+        };
+      }
       axios.post(url, param).then(function (response) {
         _this.message = '';
       });
@@ -5434,7 +5445,38 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fas fa-paper-plane"
-  })])]), _vm._v(" "), _c("div", {
+  })])]), _vm._v(" "), _c("div", [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.checked,
+      expression: "checked"
+    }],
+    attrs: {
+      type: "checkbox"
+    },
+    domProps: {
+      checked: Array.isArray(_vm.checked) ? _vm._i(_vm.checked, null) > -1 : _vm.checked
+    },
+    on: {
+      change: function change($event) {
+        var $$a = _vm.checked,
+          $$el = $event.target,
+          $$c = $$el.checked ? true : false;
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.checked = $$a.concat([$$v]));
+          } else {
+            $$i > -1 && (_vm.checked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+          }
+        } else {
+          _vm.checked = $$c;
+        }
+      }
+    }
+  }), _vm._v(" 位置情報を登録(チェックを外すと位置情報は送信されません)")]), _vm._v(" "), _c("div", {
     staticClass: "menu"
   }, [_c("h5", [_vm._v("簡易メニュー(選択して送信すれば送れます)")]), _vm._v(" "), _c("li", {
     on: {
@@ -5470,7 +5512,7 @@ var render = function render() {
       }, [_vm._v(_vm._s(user.name))]) : _vm._e()]);
     }), _vm._v(" "), _c("div", {
       staticClass: "self-message-content"
-    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))])]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at))])], 2) : _c("div", [_vm._l(_vm.users, function (user) {
+    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _vm._e()]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at))])], 2) : _c("div", [_vm._l(_vm.users, function (user) {
       return _c("div", {
         key: user.id
       }, [message.user_id === user.id ? _c("div", {
@@ -5478,7 +5520,7 @@ var render = function render() {
       }, [_vm._v(_vm._s(user.name))]) : _vm._e()]);
     }), _vm._v(" "), _c("div", {
       staticClass: "message-content"
-    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))])]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at))])], 2)]);
+    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _c("span", [_vm._v("位置情報がありません")])]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at))])], 2)]);
   }), 0)]);
 };
 var staticRenderFns = [];

@@ -14,8 +14,8 @@ class AddLocationColumn extends Migration
     public function up()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
         });
     }
 
