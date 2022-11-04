@@ -6,7 +6,7 @@
             <button type="button" @click="send()" class="btn btn-primary mt-2"><i class="fas fa-paper-plane"></i></button>
         </div>
         <div><input type="checkbox" v-model="checked"> 位置情報を登録(チェックを外すと位置情報は送信されません)</div>
-        <div class="menu">
+        <div class="easy-menu">
             <h5>簡易メニュー(選択して送信すれば送れます)</h5>
             <li @click="message = '無事です、安心してください'">無事です、安心してください</li>
             <li @click="message = '助けてください'">助けてください</li>
@@ -17,24 +17,22 @@
         <div v-for="message in messages" :key="message.id" class="message-wrap">
             <!-- 自分のメッセージ -->
             <div v-if="message.user_id === authUser" class="self">
-                <div v-for="user in users" :key="user.id">
-                    <div class="user-name" v-if="message.user_id === user.id">{{ user.name }}</div>
-                </div>
+                <!-- ユーザーの名前 -->
+                <div class="user-name">{{ message.user.name }}</div>
+
+                <!-- メッセージ内容 -->
                 <div class="self-message-content">{{ message.content }}<br>
                     <span v-if="message.latitude != null">{{ message.latitude }},{{ message.longitude }}</span>
                 </div>
-                <small>{{ message.created_at }}</small>
+                <small>{{ message.created_at.substr(0,[16]) }}</small>
             </div>
-            
+            <!-- 自分以外のメッセージ -->
             <div v-else>
-                <div v-for="user in users" :key="user.id">
-                    <div class="user-name" v-if="message.user_id === user.id">{{ user.name }}</div>
-                </div>
+                <div class="user-name">{{ message.user.name }}</div>
                 <div class="message-content">{{ message.content }}<br>
                     <span v-if="message.latitude != null">{{ message.latitude }},{{ message.longitude }}</span>
-                    <span v-else>位置情報がありません</span>
                 </div>
-                <small>{{ message.created_at }}</small>
+                <small>{{ message.created_at.substr(0,[16]) }}</small>
             </div>
         </div>
     </div>
@@ -47,7 +45,6 @@
             return {
                 message: '',
                 messages: [],
-                users: [],
                 authUser:[],
                 lat: 0,
                 lng: 0,
@@ -58,6 +55,7 @@
             send(){
                 const url = 'message/ajax/store';
                 let param={};
+                // チェックが外れていたら緯度経度はnullで返す
                 if(this.checked === true){
                     param = {
                         content:this.message,
@@ -82,11 +80,6 @@
                     this.messages = response.data;
                 });
             },
-            getUsers(){
-                axios.get('message/ajax/users').then((response) => {
-                    this.users = response.data;
-                });
-            },
             getAuthUser(){
                 axios.get('message/ajax/authUser').then((response) => {
                     this.authUser = response.data;
@@ -95,25 +88,30 @@
         },
         mounted (){
             this.getMessage();
-            this.getUsers();
             this.getAuthUser();
 
             Echo.channel('chat').listen('CreatedMessage', (e) => {
                 this.getMessage();
             });
 
+            // 位置情報の取得
             if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(
                     function success(position){
+                        // 座標
                         let coords = position.coords;
+                        // 経度
                         this.lat = coords.latitude;
+                        // 緯度
                         this.lng = coords.longitude;
                     }.bind(this),
                     function error(error){
                         alert('位置情報が取得できません'+error.code);
-                    }
+                        // 位置情報が取得できなかったらチェックを外す
+                        this.checked = false;
+                    }.bind(this)
                 );
-            };
+            }
         },
     }
 </script>

@@ -24,6 +24,7 @@
                 @enderror</p>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <small>まだ登録していませんか？{{ link_to_route('user.register','会員登録') }}</small>
         </form>        
     </div>
 </div>

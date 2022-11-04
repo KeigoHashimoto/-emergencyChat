@@ -5318,7 +5318,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       message: '',
       messages: [],
-      users: [],
       authUser: [],
       lat: 0,
       lng: 0,
@@ -5330,6 +5329,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       var url = 'message/ajax/store';
       var param = {};
+      // チェックが外れていたら緯度経度はnullで返す
       if (this.checked === true) {
         param = {
           content: this.message,
@@ -5355,37 +5355,36 @@ __webpack_require__.r(__webpack_exports__);
         _this2.messages = response.data;
       });
     },
-    getUsers: function getUsers() {
-      var _this3 = this;
-      axios.get('message/ajax/users').then(function (response) {
-        _this3.users = response.data;
-      });
-    },
     getAuthUser: function getAuthUser() {
-      var _this4 = this;
+      var _this3 = this;
       axios.get('message/ajax/authUser').then(function (response) {
-        _this4.authUser = response.data;
+        _this3.authUser = response.data;
       });
     }
   },
   mounted: function mounted() {
-    var _this5 = this;
+    var _this4 = this;
     this.getMessage();
-    this.getUsers();
     this.getAuthUser();
     Echo.channel('chat').listen('CreatedMessage', function (e) {
-      _this5.getMessage();
+      _this4.getMessage();
     });
+
+    // 位置情報の取得
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function success(position) {
+        // 座標
         var coords = position.coords;
+        // 経度
         this.lat = coords.latitude;
+        // 緯度
         this.lng = coords.longitude;
       }.bind(this), function error(error) {
         alert('位置情報が取得できません' + error.code);
-      });
+        // 位置情報が取得できなかったらチェックを外す
+        this.checked = false;
+      }.bind(this));
     }
-    ;
   }
 });
 
@@ -5477,7 +5476,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" 位置情報を登録(チェックを外すと位置情報は送信されません)")]), _vm._v(" "), _c("div", {
-    staticClass: "menu"
+    staticClass: "easy-menu"
   }, [_c("h5", [_vm._v("簡易メニュー(選択して送信すれば送れます)")]), _vm._v(" "), _c("li", {
     on: {
       click: function click($event) {
@@ -5504,23 +5503,15 @@ var render = function render() {
       staticClass: "message-wrap"
     }, [message.user_id === _vm.authUser ? _c("div", {
       staticClass: "self"
-    }, [_vm._l(_vm.users, function (user) {
-      return _c("div", {
-        key: user.id
-      }, [message.user_id === user.id ? _c("div", {
-        staticClass: "user-name"
-      }, [_vm._v(_vm._s(user.name))]) : _vm._e()]);
-    }), _vm._v(" "), _c("div", {
+    }, [_c("div", {
+      staticClass: "user-name"
+    }, [_vm._v(_vm._s(message.user.name))]), _vm._v(" "), _c("div", {
       staticClass: "self-message-content"
-    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _vm._e()]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at))])], 2) : _c("div", [_vm._l(_vm.users, function (user) {
-      return _c("div", {
-        key: user.id
-      }, [message.user_id === user.id ? _c("div", {
-        staticClass: "user-name"
-      }, [_vm._v(_vm._s(user.name))]) : _vm._e()]);
-    }), _vm._v(" "), _c("div", {
+    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _vm._e()]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at.substr(0, [16])))])]) : _c("div", [_c("div", {
+      staticClass: "user-name"
+    }, [_vm._v(_vm._s(message.user.name))]), _vm._v(" "), _c("div", {
       staticClass: "message-content"
-    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _c("span", [_vm._v("位置情報がありません")])]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at))])], 2)]);
+    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _vm._e()]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at.substr(0, [16])))])])]);
   }), 0)]);
 };
 var staticRenderFns = [];
@@ -5565,6 +5556,12 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
 
 var app = new Vue({
   el: '#app'
+});
+var tags = new Vue({
+  el: "#tags",
+  data: {
+    tags: 'tag0'
+  }
 });
 
 /***/ }),

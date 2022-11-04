@@ -25,7 +25,7 @@ class MessageController extends Controller
         event(new CreatedMessage($message));
     }
     public function index(){
-        return Message::orderBy('created_at','desc')->get();
+        return Auth::user()->feed()->orderBy('created_at','desc')->get();
     }
     public function users(){
         return User::get();

@@ -28,6 +28,12 @@ Route::prefix('user')->name('user.')->group(function(){
     Route::middleware(['auth'])->group(function(){
         Route::post('logout',[UserController::class,'logout'])->name('logout');
         Route::get('/',[UserController::class,'index'])->name('home');
+        Route::get('users',[UserController::class,'users'])->name('users');
+        Route::post('{id}/follow',[UserController::class,'Follow'])->name('follow');
+        Route::delete('{id}/unfollow',[UserController::class,'unFollow'])->name('unfollow');
+        Route::get('show',[UserController::class,'show'])->name('show');
+        Route::get('edit',[UserController::class,'edit'])->name('edit');
+        Route::put('update',[UserController::class,'update'])->name('update');
     });
 });
 
