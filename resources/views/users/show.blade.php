@@ -7,5 +7,10 @@
     <div class="user-show-contents">自分のID：{{ $user->user_id_number }}<br>
     <small>このIDで検索されます。友達になりたい人にこのIDを伝えてください。</small></div>
     <p class="user-show-contents">メールアドレス：{{ $user->email }}</p>
+
+    <form action='{{ route('user.logout') }}' method="POST">
+        @csrf
+        <button type="submit" class="btn btn-primary">Logout</button>
+    </form>
 </div>
 @endsection

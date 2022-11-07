@@ -5380,9 +5380,9 @@ __webpack_require__.r(__webpack_exports__);
         // 緯度
         this.lng = coords.longitude;
       }.bind(this), function error(error) {
+        this.checked = false;
         alert('位置情報が取得できません' + error.code);
         // 位置情報が取得できなかったらチェックを外す
-        this.checked = false;
       }.bind(this));
     }
   }
@@ -5556,12 +5556,6 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
 
 var app = new Vue({
   el: '#app'
-});
-var tags = new Vue({
-  el: "#tags",
-  data: {
-    tags: 'tag0'
-  }
 });
 
 /***/ }),

@@ -81,6 +81,7 @@ class UserController extends Controller
         $users=$query->get();
         $followings=Auth::user()->followings()->get();
         $followers=Auth::user()->followers()->get();
+        Auth::user()->load_count();
         return view('users.users',compact('users','keyword','followings','followers'));
     }
     public function logout(){

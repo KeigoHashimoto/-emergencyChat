@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="followings" v-show="tags === 'tag1'">
-            <h1>フォロー中のユーザー</h1>
+            <h1>フォロー中のユーザー<span>({{ Auth::user()->followings_count }})</span></h1>
             @if($followings->isEmpty())
                 <p>誰もフォローしていません</p>
             @else
@@ -69,7 +69,7 @@
             @endif
         </div>
         <div class="followers" v-show="tags === 'tag2'">
-            <h1>フォロワー</h1>
+            <h1>フォロワー<span>({{ Auth::user()->followers_count }})</span></h1>
             @if($followers->isEmpty())
                 <p>誰にもフォローされていません</p>
             @else

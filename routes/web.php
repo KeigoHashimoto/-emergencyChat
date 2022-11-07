@@ -38,8 +38,9 @@ Route::prefix('user')->name('user.')->group(function(){
 });
 
 Route::prefix('message')->name('message.')->middleware(['auth'])->group(function(){
-    Route::post('ajax/store',[MessageController::class,'store'])->name('store');
     Route::get('ajax/index',[MessageController::class,'index'])->name('index');
     Route::get('ajax/users',[MessageController::class,'users'])->name('users');
     Route::get('ajax/authUser',[MessageController::class,'authUser'])->name('authUser');
+    Route::post('ajax/store',[MessageController::class,'store'])->name('store');
+
 });

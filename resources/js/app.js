@@ -30,10 +30,3 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
-
-const tags = new Vue({
-    el: "#tags",
-    data:{
-        tags: 'tag0',
-    }
-})

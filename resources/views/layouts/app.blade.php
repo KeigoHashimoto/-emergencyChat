@@ -13,7 +13,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 
-    <title>ChatApp</title>
+    <title>Helme</title>
 
 
     <!-- Fonts -->

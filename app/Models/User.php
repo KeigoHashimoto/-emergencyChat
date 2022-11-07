@@ -88,4 +88,7 @@ class User extends Authenticatable
         // メッセージ+ユーザーからuser_idと$userIdが同じものを探す
         return Message::with('user')->whereIn('user_id',$follow_each);
     }
+    public function load_count(){
+        $this->loadCount('followings','followers');
+    }
 }
