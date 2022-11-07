@@ -2,10 +2,8 @@
 <div class="col-md-8">
     <div class="message-input mt-3">
         <div class="form">
-            <form action="message/ajax/store" method="post">
-                <input name="message" v-model="message" class="form-control" placeholder="ここに文章を入力してください">
-                <button type="button" @click="send()" class="btn btn-primary mt-2"><i class="fas fa-paper-plane"></i></button>
-            </form>
+            <input name="message" v-model="message" class="form-control" placeholder="ここに文章を入力してください">
+            <button type="button" @click="send()" class="btn btn-primary mt-2"><i class="fas fa-paper-plane"></i></button>
         </div>
         <div><input type="checkbox" v-model="checked"> 位置情報を登録(チェックを外すと位置情報は送信されません)</div>
         <div class="easy-menu">
