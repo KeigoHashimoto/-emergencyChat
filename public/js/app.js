@@ -5411,6 +5411,11 @@ var render = function render() {
     staticClass: "message-input mt-3"
   }, [_c("div", {
     staticClass: "form"
+  }, [_c("form", {
+    attrs: {
+      action: "message/ajax/store",
+      method: "post"
+    }
   }, [_c("input", {
     directives: [{
       name: "model",
@@ -5444,7 +5449,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fas fa-paper-plane"
-  })])]), _vm._v(" "), _c("div", [_c("input", {
+  })])])]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
