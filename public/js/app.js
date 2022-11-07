@@ -5555,7 +5555,10 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    tags: 'tag0'
+  }
 });
 
 /***/ }),
