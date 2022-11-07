@@ -4,4 +4,4 @@
 
 <p>今すぐアプリを開いて確認してください！</p>
 
-<a href="#">Helme</a>
+<a href="https://blackcat-bear.sakura.ne.jp/Helme/">Helme</a>

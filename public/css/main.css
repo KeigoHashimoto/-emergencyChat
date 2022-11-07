@@ -8,6 +8,26 @@ header{
 header .logout{
     margin-left:auto;
 }
+.welcome{
+    max-width:500px;
+    margin:2rem auto;
+    padding:2rem;
+    background: #ccc;
+}
+.welcome-wrap{
+    width: fit-content;
+    margin:0 auto;
+    display: flex;
+    column-gap:1rem;
+}
+.welcome-menu{
+    padding:.3rem 2rem;
+    background: #333;
+    color:#fff;
+    border-radius:5px;
+    display: block;
+    width: fit-content;
+}
 .easy-menu{
     padding: 1rem;
     margin-top: 1rem;
@@ -134,17 +154,24 @@ header .logout{
     border:none;
 }
 .icon{
-    background: green;
+    background: #333;
     border-radius:50%;
     width: 70px;
     height: 70px;
     text-decoration:none;
-    font-size:2rem;
+    font-size:5vw;
     display: flex;
     justify-content: center;
     align-items: center;
     color:#fff;
     font-weight:bold;
+    margin:1rem 0;
+}
+@media screen and (max-width:540px){
+    .icon{
+        width: 40px;
+        height: 40px;
+    }
 }
 .menu{
     display: flex;
