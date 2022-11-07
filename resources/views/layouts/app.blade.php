@@ -22,9 +22,11 @@
 
 </head>
 <body>
-    @include('commons.header')
+    <div id="app">
+        @include('commons.header')
 
-    @yield('content')
+        @yield('content')
+    </div>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" defer></script>
