@@ -24,7 +24,7 @@
                 <div class="self-message-content">{{ message.content }}<br>
                     <span v-if="message.latitude != null">{{ message.latitude }},{{ message.longitude }}</span>
                 </div>
-                <small>{{ message.created_at.substr(0,[16]) }}</small>
+                <small>{{ message.created_at.substr(0,[10]) }}</small>
             </div>
             <!-- 自分以外のメッセージ -->
             <div v-else>
@@ -32,7 +32,7 @@
                 <div class="message-content">{{ message.content }}<br>
                     <span v-if="message.latitude != null">{{ message.latitude }},{{ message.longitude }}</span>
                 </div>
-                <small>{{ message.created_at.substr(0,[16]) }}</small>
+                <small>{{ message.created_at.substr(0,[10]) }}</small>
             </div>
         </div>
     </div>

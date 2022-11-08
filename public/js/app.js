@@ -5507,11 +5507,11 @@ var render = function render() {
       staticClass: "user-name"
     }, [_vm._v(_vm._s(message.user.name))]), _vm._v(" "), _c("div", {
       staticClass: "self-message-content"
-    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _vm._e()]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at.substr(0, [16])))])]) : _c("div", [_c("div", {
+    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _vm._e()]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at.substr(0, [10])))])]) : _c("div", [_c("div", {
       staticClass: "user-name"
     }, [_vm._v(_vm._s(message.user.name))]), _vm._v(" "), _c("div", {
       staticClass: "message-content"
-    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _vm._e()]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at.substr(0, [16])))])])]);
+    }, [_vm._v(_vm._s(message.content)), _c("br"), _vm._v(" "), message.latitude != null ? _c("span", [_vm._v(_vm._s(message.latitude) + "," + _vm._s(message.longitude))]) : _vm._e()]), _vm._v(" "), _c("small", [_vm._v(_vm._s(message.created_at.substr(0, [10])))])])]);
   }), 0)]);
 };
 var staticRenderFns = [];
