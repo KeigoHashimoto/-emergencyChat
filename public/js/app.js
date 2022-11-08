@@ -5557,7 +5557,8 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
 var app = new Vue({
   el: '#app',
   data: {
-    tags: 'tag0'
+    tags: 'tag0',
+    menuBtn: false
   }
 });
 

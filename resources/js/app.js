@@ -31,5 +31,6 @@ const app = new Vue({
     el: '#app',
     data:{
         tags: 'tag0',
+        menuBtn:false,
     }
 });

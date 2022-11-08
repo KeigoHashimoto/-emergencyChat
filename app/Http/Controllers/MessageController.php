@@ -29,7 +29,15 @@ class MessageController extends Controller
 
         //Pusherに通知を送るイベント
         event(new CreatedMessage($message));
-        $users=$user->followers()->get();
+
+        //相互フォローしている人にだけ、メッセージ送信時メールを送る
+        //自分がフォローしている人のIDを配列に入れる
+        $followUserId = Auth::user()->followings()->pluck('users.id')->toArray();
+        //自分をフォローしている人の中から、$followUserIdと同じuser_idを持つuserのIDを配列に入れる。
+        $followEach = Auth::user()->followers()->whereIn('user_id',$followUserId)->pluck('users.id')->toArray();
+        //全ユーザの中で相互フォローしている人を取得。
+        $users=User::whereIn('id',$followEach)->get();
+
         event(new PostedMessage($users,$user));
         
     }
